@@ -1,0 +1,35 @@
+.App{
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+.container {
+  margin: 0 auto;
+  display: grid;
+  justify-content: center;
+}
+
+.main-video {
+  margin: 0 auto;
+  height: 400px;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  background: #888;
+}
+
+.container-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 5px;
+}
+
+.card {
+  height: 150px;
+  width: 275px;
+  border-radius: 5%;
+  background: #888;
+  list-style: none;
+}
