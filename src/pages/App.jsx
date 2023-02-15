@@ -9,24 +9,20 @@ function App () {
   }, [])
   return (
     <div className="App" style={{ background }}>
-      <main>
-        <h1>COLORS video player</h1>
-          <img className="main-video" src="https://i.ytimg.com/vi_webp/vCwKgEFSsyI/maxresdefault.webp" alt="main video" style={{ objectFit: 'contain' }}/>
+      <main className='main'>
+        <h1 class="title">COLORS video player</h1>
+        <img className="main-video" src="https://i.ytimg.com/vi_webp/vCwKgEFSsyI/maxresdefault.webp" alt="main video" style={{ objectFit: 'contain' }}/>
       </main>
-      <article>
-        <div>
-          <h2>Latests videos</h2>
-            <ul class="container-items">
-              <li class="card"></li>
-              <li class="card"></li>
-              <li class="card"></li>
-              <li class="card"></li>
-              <li class="card"></li>
-              <li class="card"></li>
-              <li class="card"></li>
-              <li class="card"></li>
-            </ul>
-        </div>
+      <article class="container-items">
+          <h2 class="subtitle">Latests videos</h2>
+          <li class="card"></li>
+          <li class="card"></li>
+          <li class="card"></li>
+          <li class="card"></li>
+          <li class="card"></li>
+          <li class="card"></li>
+          <li class="card"></li>
+          <li class="card"></li>
       </article>
     </div>
   )

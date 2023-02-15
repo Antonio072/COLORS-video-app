@@ -5,13 +5,4 @@
 body {
   margin: 0px;
   padding: 0px;
-  display: grid;
-  justify-content: center;
-  align-content: start;
-}
-
-#root {
-  display: grid;
-  justify-content: center;
-  align-content: start;
 }
