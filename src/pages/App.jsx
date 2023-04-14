@@ -7,6 +7,7 @@ function App () {
   const [colorValue, setColorValue] = useState('#eedbae')
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
   const [filteredData, setFilteredData] = useState(data)
+  const [currentVideo, setCurrentVideo] = useState('vCwKgEFSsyI')
 
   useEffect(() => {
     console.log(`El color seleccionado es: ${debounceBackgroundDecimal}`)
@@ -32,11 +33,21 @@ function App () {
     return { r, g, b }
   }
 
+  const handleChangeCurrentVideo = (videoId) => {
+    setCurrentVideo(videoId)
+  }
+
   return (
     <div className="App" style={{ background: `linear-gradient(${debounceBackgroundDecimal} 15%, white)` }}>
       <main className='main'>
         <h1 class="title">COLORS video player</h1>
-        <img className="main-video" src="https://i.ytimg.com/vi_webp/vCwKgEFSsyI/maxresdefault.webp" alt="main video" style={{ objectFit: 'contain' }}/>
+        {/* <img className="main-video" src="https://i.ytimg.com/vi_webp/vCwKgEFSsyI/maxresdefault.webp" alt="main video" style={{ objectFit: 'contain' }}/> */}
+        <iframe className="main-video"
+                src={`https://www.youtube.com/embed/${currentVideo}`}
+                title="YouTube video player"
+                 frameborder="0"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 allowfullscreen/>
       </main>
       <p>Running with {debounceBackgroundDecimal}</p>
       <article class="container-items">
@@ -47,9 +58,9 @@ function App () {
         </div>
         <h2 className="subtitle">Latest videos</h2>
         {filteredData.map((item) =>
-          <div className="card" style={{ border: `5px solid #${item.predominant_color}` }}>
-            <img src={item.thumbnail_url} alt="thumbnail" className="thumbnail" />
-          </div>)}
+          <button id={item.video_id} className="card" style={{ border: `5px solid #${item.predominant_color}` }} onClick={() => handleChangeCurrentVideo(item.video_id)}>
+            <img src={item.thumbnail_url} alt="thumbnail" className="thumbnail"/>
+          </button>)}
       </article>
     </div>
   )

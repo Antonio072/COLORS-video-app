@@ -35,10 +35,10 @@
   margin: 0 auto;
   aspect-ratio: 16/9;
   border-radius: 10px;
-  max-height: 450px;
+  min-height: 450px;
+  max-height: 650px;
   object-fit: contain;
   height: 100%;
-  width: 100%;
 }
 
 .container-items {
@@ -55,6 +55,13 @@
   border-radius: 5%;
   background: #888;
   list-style: none;
+}
+.card:hover {
+  background: #555;
+  cursor: pointer;
+  scale: 1.05;
+  transition: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 
 .card__badge{
