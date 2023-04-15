@@ -59,7 +59,7 @@ Uso
 3. Haz clic en cualquier miniatura de video para reproducirlo directamente en la aplicación.
 4. Puedes pausar, reanudar o detener la reproducción del video utilizando los controles de video integrados en la aplicación.
 
-Contribución
+## Contribución
 
 Si deseas contribuir a este proyecto, puedes seguir los siguientes pasos:
 
