@@ -47,6 +47,7 @@ function App () {
                  frameborder="0"
                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                  allowfullscreen/>
+        <h2 className='subtitle'>Playing: {currentVideo.title}</h2>
       </main>
       <article class="container-items">
         <div class="color-slider">
