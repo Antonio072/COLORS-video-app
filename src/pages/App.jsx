@@ -49,7 +49,6 @@ function App () {
                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                  allowfullscreen/>
       </main>
-      <p>Running with {debounceBackgroundDecimal}</p>
       <article class="container-items">
         <div class="color-slider">
           <input type="color" value={colorValue} step={1} class="slider" id="myRange"
