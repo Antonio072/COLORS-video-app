@@ -7,7 +7,7 @@ function App () {
   const [colorValue, setColorValue] = useState('#eedbae')
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
   const [filteredData, setFilteredData] = useState(data)
-  const [currentVideo, setCurrentVideo] = useState('vCwKgEFSsyI')
+  const [currentVideo, setCurrentVideo] = useState({ video_id: 'vCwKgEFSsyI', thumbnail_url: 'https://i.ytimg.com/vi/vCwKgEFSsyI/maxresdefault.jpg', predominant_color: '#9f9f9f' })
 
   useEffect(() => {
     console.log(`El color seleccionado es: ${debounceBackgroundDecimal}`)
@@ -33,17 +33,16 @@ function App () {
     return { r, g, b }
   }
 
-  const handleChangeCurrentVideo = (videoId) => {
-    setCurrentVideo(videoId)
+  const handleChangeCurrentVideo = (item) => {
+    setCurrentVideo(item)
   }
 
   return (
-    <div className="App" style={{ background: `linear-gradient(${debounceBackgroundDecimal} 15%, white)` }}>
+    <div className="App" style={{ background: `linear-gradient(${currentVideo.predominant_color} 35%, white)` }}>
       <main className='main'>
         <h1 class="title">COLORS video player</h1>
-        {/* <img className="main-video" src="https://i.ytimg.com/vi_webp/vCwKgEFSsyI/maxresdefault.webp" alt="main video" style={{ objectFit: 'contain' }}/> */}
         <iframe className="main-video"
-                src={`https://www.youtube.com/embed/${currentVideo}`}
+                src={`https://www.youtube.com/embed/${currentVideo.video_id}`}
                 title="YouTube video player"
                  frameborder="0"
                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -57,7 +56,7 @@ function App () {
         </div>
         <h2 className="subtitle">Latest videos</h2>
         {filteredData.map((item) =>
-          <button id={item.video_id} className="card" style={{ border: `5px solid #${item.predominant_color}` }} onClick={() => handleChangeCurrentVideo(item.video_id)}>
+          <button id={item.video_id} className="card" onClick={() => handleChangeCurrentVideo(item)}>
             <img src={item.thumbnail_url} alt="thumbnail" className="thumbnail"/>
           </button>)}
       </article>
