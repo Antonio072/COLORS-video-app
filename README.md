@@ -52,7 +52,7 @@ yarn dev
 ```
 5. Abre tu navegador y visita http://localhost:5173 para ver la aplicación en acción.
 
-Uso
+## Uso
 
 1. En la página principal de la aplicación, podrás ver una lista de los videos del canal COLORS en YouTube, clasificados según el color predominante de su miniatura.
 2. Haz clic en los botones de colores en la parte superior de la página para filtrar los videos por color.
