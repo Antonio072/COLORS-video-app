@@ -82,3 +82,18 @@ Este proyecto fue creado por [José Antonio Velázquez Mandujano](https://github
 ## Licencia
 
 Este proyecto está bajo la Licencia [MIT](LICENSE). Siéntete libre de utilizar, modificar y distribuir este proyecto de acuerdo a los términos de dicha licencia.
+
+## TODOs
+
+### v1
+- [ ] Reproducción automática al seleccionar video
+- [ ] Titulos y duración de videos
+- [ ] Crear lista de reproducción personalizada
+- [ ] Guardar filtros en cache
+- [ ] Usar API como backend
+- [ ] Mejorar diseño de la aplicación
+
+### v2
+- [ ] Estado inicial para seleccionar color
+- [ ] Poder cambiar offset de busqueda de color
+- [ ] Cambiar diseño del input para selccionar el color
