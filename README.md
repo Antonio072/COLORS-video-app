@@ -87,7 +87,9 @@ Este proyecto está bajo la Licencia [MIT](LICENSE). Siéntete libre de utilizar
 
 ### v1
 - [x] Reproducción automática al seleccionar video
-- [ ] Titulos y duración de videos
+- [x] Títulos y duración de videos
+- [x] Cambio de contraste de texto según color de fondo
+- [ ] Cambiar el fondo por una animación de gradiente
 - [ ] Crear lista de reproducción personalizada
 - [ ] Guardar filtros en cache
 - [ ] Usar API como backend
