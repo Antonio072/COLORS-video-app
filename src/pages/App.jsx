@@ -6,7 +6,7 @@ import '../styles/App.css'
 
 function App () {
   const data = useAppSelector(state => state.videos)
-  const [colorValue, setColorValue] = useState('#eedbae')
+  const [colorValue, setColorValue] = useState('#9f9f9f')
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
   const [filteredData, setFilteredData] = useState(data)
   const [currentVideo, setCurrentVideo] = useState({ video_id: 'vCwKgEFSsyI', thumbnail_url: 'https://i.ytimg.com/vi/vCwKgEFSsyI/maxresdefault.jpg', predominant_color: '#9f9f9f' })
@@ -26,6 +26,9 @@ function App () {
     })
     console.log(filteredData)
     setFilteredData(filteredData)
+
+    const contrastingColor = getContrastingColor(debounceBackgroundDecimal)
+    setFontContrastColor(contrastingColor)
   }, [debounceBackgroundDecimal])
 
   function hexToRgb (hexValue) {
