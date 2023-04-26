@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useDebounce } from '../hooks/useDebounce'
+import { useVideoActions } from '../hooks/useVideoActions'
 import { useAppSelector } from '../store/store'
 
 import { getContrastingColor, filterDataFromHex } from '../utils/functions'
 import '../styles/App.css'
 
 function App () {
-  const data = useAppSelector(state => state.videos)
+  const { changeVideo } = useVideoActions()
+  const { filteredData: data, currentVideo } = useAppSelector(state => state.videos)
   const [colorValue, setColorValue] = useState('#9f9f9f')
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
   const [filteredData, setFilteredData] = useState(data)
-  const [currentVideo, setCurrentVideo] = useState({ video_id: 'vCwKgEFSsyI', thumbnail_url: 'https://i.ytimg.com/vi/vCwKgEFSsyI/maxresdefault.jpg', predominant_color: '#9f9f9f' })
   const [fontContrastColor, setFontContrastColor] = useState(() => {
     const contrastingColor = getContrastingColor(currentVideo.predominant_color)
     return contrastingColor
@@ -27,7 +28,7 @@ function App () {
   }, [debounceBackgroundDecimal])
 
   const handleChangeCurrentVideo = (item) => {
-    setCurrentVideo(item)
+    changeVideo({ currentVideo: item, filteredData })
     const contrastingColor = getContrastingColor(item.predominant_color)
     setFontContrastColor(contrastingColor)
     console.log(contrastingColor)
@@ -57,7 +58,7 @@ function App () {
             : 'Latest videos'
           }
         </h2>
-        {filteredData.map((item) =>
+        {filteredData.length > 0 && filteredData.map((item) =>
         <article>
           <button id={item.video_id} className="card" onClick={() => handleChangeCurrentVideo(item)}>
             <img src={item.thumbnail_url} alt="thumbnail" className="thumbnail"/>
