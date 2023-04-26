@@ -91,7 +91,7 @@ Este proyecto está bajo la Licencia [MIT](LICENSE). Siéntete libre de utilizar
 - [x] Cambio de contraste de texto según color de fondo
 - [ ] Cambiar el fondo por una animación de gradiente
 - [ ] Crear lista de reproducción personalizada
-- [ ] Guardar filtros en cache
+- [x] Guardar filtros en cache
 - [ ] Usar API como backend
 - [ ] Mejorar diseño de la aplicación
 
