@@ -85,9 +85,17 @@ function App () {
           }
         </h2>
         {filteredData.map((item) =>
+        <article>
           <button id={item.video_id} className="card" onClick={() => handleChangeCurrentVideo(item)}>
             <img src={item.thumbnail_url} alt="thumbnail" className="thumbnail"/>
-          </button>)}
+            <div className="card__pill">
+              <p className="card__duration">4:12</p>
+            </div>
+          </button>
+          <div className="card__info">
+            <p className="card__title" style={{ color: fontContrastColor }}>{item.title}</p>
+          </div>
+        </article>)}
       </article>
     </div>
   )

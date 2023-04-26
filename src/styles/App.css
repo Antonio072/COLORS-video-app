@@ -61,6 +61,7 @@
   aspect-ratio: 16/9;
   border-radius: 5%;
   list-style: none;
+  position: relative;
 }
 .card:hover {
   cursor: pointer;
@@ -75,6 +76,40 @@
   font-size: 1rem;
   font-weight: 700;
   border-radius: 5px;
+}
+
+.card__title{
+  font-weight: 700;
+  color: #fff;
+  padding: 5px;
+  text-align: left;
+  margin-top: 0px;
+}
+
+.card__info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card__pill{
+  height: 30px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  border-radius: 5px;
+  padding: 0px 5px;
+  margin: 5px;
+  background: #2e2e2e;
+  color:white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.card__duration{
+  color: white;
+  margin: 0px 5px;
+  padding: 8px 0px;
 }
 
 .thumbnail {
