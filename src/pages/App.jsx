@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDebounce } from '../hooks/useDebounce'
+import { useAppSelector } from '../store/store'
+
 import '../styles/App.css'
-import data from '../imagesInfo.json'
 
 function App () {
+  const data = useAppSelector(state => state.videos)
   const [colorValue, setColorValue] = useState('#eedbae')
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
   const [filteredData, setFilteredData] = useState(data)
