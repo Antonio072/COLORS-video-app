@@ -1,5 +1,6 @@
 import VIDEOS_INFO from '../../imagesInfo.json'
 import { createSlice } from '@reduxjs/toolkit'
+import { filterDataFromHex } from '../../utils/functions'
 
 const DEFAULT_STATE = {
   currentVideo: VIDEOS_INFO[0],
@@ -17,11 +18,19 @@ export const slice = createSlice({
   initialState,
   reducers: {
     changeCurrentVideo: (state, action) => {
-      state.currentVideo = action.payload.currentVideo
-      state.filteredData = action.payload.filteredData
+      const { currentVideo } = action.payload
+      state.currentVideo = currentVideo
+      state.originalVideos = action.payload.originalVideos
+    },
+    filterData: (state, action) => {
+      const { hexValue: hex, offset, originalVideos } = action.payload
+      const filteredData = filterDataFromHex(hex, offset, originalVideos)
+
+      state.filteredData = filteredData
+      state.originalVideos = originalVideos
     }
   }
 })
 
 export default slice.reducer
-export const { changeCurrentVideo } = slice.actions
+export const { changeCurrentVideo, filterData } = slice.actions

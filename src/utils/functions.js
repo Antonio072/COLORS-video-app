@@ -14,15 +14,15 @@ export function getContrastingColor (hex) {
   const b = parseInt(hex.slice(4, 6), 16)
   // https://stackoverflow.com/a/3943023/112731
   return (r * 0.299 + g * 0.587 + b * 0.114) > 100
-    ? CONTRAST_COLORS.black
-    : CONTRAST_COLORS.white
+    ? CONTRAST_COLORS.white
+    : CONTRAST_COLORS.black
 }
 
 export function filterDataFromHex (hex, offset = 50, array = []) {
   const filterHexValue = hex
   const filterRgbValue = hexToRgb(filterHexValue)
 
-  array.filter(item => {
+  array = array.filter(item => {
     const itemRgbValue = hexToRgb(item.predominant_color)
     const rDiff = Math.abs(itemRgbValue.r - filterRgbValue.r)
     const gDiff = Math.abs(itemRgbValue.g - filterRgbValue.g)

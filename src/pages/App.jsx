@@ -3,15 +3,14 @@ import { useDebounce } from '../hooks/useDebounce'
 import { useVideoActions } from '../hooks/useVideoActions'
 import { useAppSelector } from '../store/store'
 
-import { getContrastingColor, filterDataFromHex } from '../utils/functions'
+import { getContrastingColor } from '../utils/functions'
 import '../styles/App.css'
 
 function App () {
-  const { changeVideo } = useVideoActions()
-  const { filteredData: data, currentVideo } = useAppSelector(state => state.videos)
+  const { changeVideo, filterVideos } = useVideoActions()
+  const { filteredData, currentVideo, originalVideos } = useAppSelector(state => state.videos)
   const [colorValue, setColorValue] = useState('#9f9f9f')
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
-  const [filteredData, setFilteredData] = useState(data)
   const [fontContrastColor, setFontContrastColor] = useState(() => {
     const contrastingColor = getContrastingColor(currentVideo.predominant_color)
     return contrastingColor
@@ -19,16 +18,13 @@ function App () {
 
   useEffect(() => {
     console.log(`El color seleccionado es: ${debounceBackgroundDecimal}`)
-    const filteredData = filterDataFromHex(debounceBackgroundDecimal, 50, data)
-    console.log(filteredData)
-    setFilteredData(filteredData)
-
+    filterVideos({ hexValue: debounceBackgroundDecimal, offset: 50, originalVideos })
     const contrastingColor = getContrastingColor(debounceBackgroundDecimal)
     setFontContrastColor(contrastingColor)
   }, [debounceBackgroundDecimal])
 
   const handleChangeCurrentVideo = (item) => {
-    changeVideo({ currentVideo: item, filteredData })
+    changeVideo({ currentVideo: item, filteredData, originalVideos })
     const contrastingColor = getContrastingColor(item.predominant_color)
     setFontContrastColor(contrastingColor)
     console.log(contrastingColor)

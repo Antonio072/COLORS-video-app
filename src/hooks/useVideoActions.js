@@ -1,12 +1,16 @@
-import { changeCurrentVideo } from '../store/slices/videoSlice'
+import { changeCurrentVideo, filterData } from '../store/slices/videoSlice'
 import { useAppDispatch } from '../store/store'
 
 export const useVideoActions = () => {
   const dispatch = useAppDispatch()
 
-  const changeVideo = ({ currentVideo, filteredData }) => {
-    dispatch(changeCurrentVideo({ currentVideo, filteredData }))
+  const changeVideo = ({ currentVideo, filteredData, originalVideos }) => {
+    dispatch(changeCurrentVideo({ currentVideo, filteredData, originalVideos }))
   }
 
-  return { changeVideo }
+  const filterVideos = ({ hexValue, offset, originalVideos }) => {
+    dispatch(filterData({ hexValue, offset, originalVideos }))
+  }
+
+  return { changeVideo, filterVideos }
 }
