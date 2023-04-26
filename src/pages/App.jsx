@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDebounce } from '../hooks/useDebounce'
 import { useAppSelector } from '../store/store'
 
+import { getContrastingColor, filterDataFromHex } from '../utils/functions'
 import '../styles/App.css'
 
 function App () {
@@ -17,16 +18,7 @@ function App () {
 
   useEffect(() => {
     console.log(`El color seleccionado es: ${debounceBackgroundDecimal}`)
-    const filterHexValue = debounceBackgroundDecimal
-    const filterRgbValue = hexToRgb(filterHexValue)
-    const offset = 50
-    const filteredData = data.filter(item => {
-      const itemRgbValue = hexToRgb(item.predominant_color)
-      const rDiff = Math.abs(itemRgbValue.r - filterRgbValue.r)
-      const gDiff = Math.abs(itemRgbValue.g - filterRgbValue.g)
-      const bDiff = Math.abs(itemRgbValue.b - filterRgbValue.b)
-      return rDiff <= offset && gDiff <= offset && bDiff <= offset
-    })
+    const filteredData = filterDataFromHex(debounceBackgroundDecimal, 50, data)
     console.log(filteredData)
     setFilteredData(filteredData)
 
@@ -34,37 +26,11 @@ function App () {
     setFontContrastColor(contrastingColor)
   }, [debounceBackgroundDecimal])
 
-  function hexToRgb (hexValue) {
-    hexValue = hexValue.replace('#', '')
-    const r = parseInt(hexValue.substring(0, 2), 16)
-    const g = parseInt(hexValue.substring(2, 4), 16)
-    const b = parseInt(hexValue.substring(4, 6), 16)
-    return { r, g, b }
-  }
-
   const handleChangeCurrentVideo = (item) => {
     setCurrentVideo(item)
     const contrastingColor = getContrastingColor(item.predominant_color)
     setFontContrastColor(contrastingColor)
     console.log(contrastingColor)
-  }
-
-  function getContrastingColor (hex) {
-    if (hex.indexOf('#') === 0) {
-      hex = hex.slice(1)
-    }
-
-    if (hex.length === 3) {
-      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
-    }
-
-    const r = parseInt(hex.slice(0, 2), 16)
-    const g = parseInt(hex.slice(2, 4), 16)
-    const b = parseInt(hex.slice(4, 6), 16)
-    // https://stackoverflow.com/a/3943023/112731
-    return (r * 0.299 + g * 0.587 + b * 0.114) > 100
-      ? '#2e2e2e'
-      : '#e3e3e3'
   }
 
   return (
