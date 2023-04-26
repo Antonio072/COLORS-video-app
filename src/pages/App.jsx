@@ -65,7 +65,7 @@ function App () {
       <main className='main'>
         <h1 class="title" style={{ color: fontContrastColor }}>COLORS video player</h1>
         <iframe className="main-video"
-                src={`https://www.youtube.com/embed/${currentVideo.video_id}`}
+                src={`https://www.youtube.com/embed/${currentVideo.video_id}?autoplay=1`}
                 title="YouTube video player"
                  frameborder="0"
                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
