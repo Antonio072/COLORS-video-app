@@ -9,7 +9,7 @@ import '../styles/App.css'
 function App () {
   const { changeVideo, filterVideos } = useVideoActions()
   const { filteredData, currentVideo, originalVideos } = useAppSelector(state => state.videos)
-  const [colorValue, setColorValue] = useState('#9f9f9f')
+  const [colorValue, setColorValue] = useState(currentVideo.predominant_color)
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
   const [fontContrastColor, setFontContrastColor] = useState(() => {
     const contrastingColor = getContrastingColor(currentVideo.predominant_color)
