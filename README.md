@@ -86,7 +86,7 @@ Este proyecto está bajo la Licencia [MIT](LICENSE). Siéntete libre de utilizar
 ## TODOs
 
 ### v1
-- [ ] Reproducción automática al seleccionar video
+- [x] Reproducción automática al seleccionar video
 - [ ] Titulos y duración de videos
 - [ ] Crear lista de reproducción personalizada
 - [ ] Guardar filtros en cache
