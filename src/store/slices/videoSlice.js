@@ -5,7 +5,8 @@ import { filterDataFromHex } from '../../utils/functions'
 const DEFAULT_STATE = {
   currentVideo: VIDEOS_INFO[0],
   filteredData: VIDEOS_INFO,
-  originalVideos: VIDEOS_INFO
+  originalVideos: VIDEOS_INFO,
+  playlist: []
 }
 
 const initialState = () => {
@@ -28,9 +29,14 @@ export const slice = createSlice({
 
       state.filteredData = filteredData
       state.originalVideos = originalVideos
+    },
+    addVideoToPlaylist: (state, action) => {
+      // Insert the video to the end of the playlist that is an array
+      const { video } = action.payload
+      state.playlist.push(video)
     }
   }
 })
 
 export default slice.reducer
-export const { changeCurrentVideo, filterData } = slice.actions
+export const { changeCurrentVideo, filterData, addVideoToPlaylist } = slice.actions
