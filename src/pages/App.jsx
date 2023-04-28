@@ -6,9 +6,10 @@ import { useAppSelector } from '../store/store'
 import { getContrastingColor } from '../utils/functions'
 import '../styles/App.css'
 import AddToQueue from '../svgs/AddToQueue'
+import DeleteFromQueue from '../svgs/DeleteFromQueue'
 
 function App () {
-  const { changeVideo, filterVideos, addToPlaylist } = useVideoActions()
+  const { changeVideo, filterVideos, addToPlaylist, deleteFromPlaylist } = useVideoActions()
   const { filteredData, currentVideo, originalVideos, playlist } = useAppSelector(state => state.videos)
   const [colorValue, setColorValue] = useState(currentVideo.predominant_color)
   const debounceBackgroundDecimal = useDebounce(colorValue, 500)
@@ -35,6 +36,15 @@ function App () {
     addToPlaylist({ video })
   }
 
+  const handleDeleteVideoFromPlaylist = (video) => {
+    const card = document.getElementById(`playlist_id_${video.video_id}`)
+    card.classList.add('deleted')
+    setTimeout(() => {
+      deleteFromPlaylist({ video })
+      card.classList.remove('deleted')
+    }, 250)
+  }
+
   // TODO Add playlist slider
   // -> Crear una playlist -> El primer elemento que tiene sera el video actual
   // -> Los videos ademas de tener un boton para reproducir tendran uno para agregarlo a la lista
@@ -53,7 +63,12 @@ function App () {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen/>
           {playlist && Object.values(playlist).map((item) =>
-            <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
+            <li class="playlist__card" id={`playlist_id_${item.video_id}`}>
+              <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
+              <div className="card__pill delete__icon" onClick={() => handleDeleteVideoFromPlaylist(item)}>
+                <DeleteFromQueue className='delete__icon' color={'#fff'} height={20} width={20} />
+              </div>
+            </li>
           )}
         </section>
         <h2 className='subtitle' style={{ color: fontContrastColor }}>Playing: {currentVideo.title}</h2>

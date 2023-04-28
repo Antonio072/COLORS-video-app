@@ -36,9 +36,13 @@ export const slice = createSlice({
     addVideoToPlaylist: (state, action) => {
       const { video } = action.payload
       state.playlist[video.video_id] = video
+    },
+    deleteVideoFromPlaylist: (state, action) => {
+      const { video } = action.payload
+      delete state.playlist[video.video_id]
     }
   }
 })
 
 export default slice.reducer
-export const { changeCurrentVideo, filterData, addVideoToPlaylist } = slice.actions
+export const { changeCurrentVideo, filterData, addVideoToPlaylist, deleteVideoFromPlaylist } = slice.actions
