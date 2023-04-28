@@ -94,6 +94,8 @@ Este proyecto está bajo la Licencia [MIT](LICENSE). Siéntete libre de utilizar
 - [x] Guardar filtros en cache
 - [ ] Usar API como backend
 - [ ] Mejorar diseño de la aplicación
+- [ ] Playlist aleatoria
+- [ ] Sonner para los toast de acciones
 
 ### v2
 - [ ] Estado inicial para seleccionar color
