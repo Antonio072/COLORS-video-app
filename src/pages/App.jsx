@@ -52,7 +52,7 @@ function App () {
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen/>
-          {playlist && playlist.map((item) =>
+          {playlist && Object.values(playlist).map((item) =>
             <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
           )}
         </section>
