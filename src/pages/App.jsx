@@ -77,6 +77,7 @@ function App () {
       </main>
       <article class="container-items">
         <div class="color-slider">
+          <p style={{ color: fontContrastColor }}>Select a color to find similar videos</p>
           <input type="color" value={colorValue} step={1} class="slider" id="myRange"
             onChange={(e) => setColorValue(e.target.value)}
           />
@@ -84,7 +85,7 @@ function App () {
         <h2 className="subtitle" style={{ color: fontContrastColor }}>
           {filteredData.length === 0
             ? 'No videos found'
-            : 'Latest videos'
+            : 'Similiar videos'
           }
         </h2>
         {filteredData.length > 0 && filteredData.map((item) =>
@@ -96,7 +97,7 @@ function App () {
                 <AddToQueue color={'#fff'} height={20} width={20}/>
               </div>
               <div className="card__pill">
-                <p className="card__duration">4:12</p>
+                <p className="card__duration">{item.duration ? item.duration : '03:12'}</p>
               </div>
             </footer>
           </div>
