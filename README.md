@@ -11,8 +11,8 @@ Este proyecto es una aplicación web desarrollada con Vite y React que te permit
 
 ## Capturas de pantalla
 
-![Captura de pantalla 1](screenshot1.png)
-![Captura de pantalla 2](screenshot2.png)
+![Captura de pantalla 1](docs/imgs/screenshoot_01.JPG)
+![Captura de pantalla 2](docs/imgs/screenshoot_02.JPG)
 
 ## Instalación
 
