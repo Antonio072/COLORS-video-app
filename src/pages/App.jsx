@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDebounce } from '../hooks/useDebounce'
+import { Toaster } from 'sonner'
+
 import { useVideoActions } from '../hooks/useVideoActions'
 import { useAppSelector } from '../store/store'
 
@@ -103,6 +105,7 @@ function App () {
           </div>
         </article>)}
       </article>
+      <Toaster richColors />
     </div>
   )
 }
