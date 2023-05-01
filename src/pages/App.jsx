@@ -77,7 +77,7 @@ function App () {
       </main>
       <article class="container-items">
         <div class="color-slider">
-          <p style={{ color: fontContrastColor }}>Select a color to find similar videos</p>
+          <label style={{ color: fontContrastColor }}>Select a color to find similar videos</label>
           <input type="color" value={colorValue} step={1} class="slider" id="myRange"
             onChange={(e) => setColorValue(e.target.value)}
           />
@@ -85,7 +85,7 @@ function App () {
         <h2 className="subtitle" style={{ color: fontContrastColor }}>
           {filteredData.length === 0
             ? 'No videos found'
-            : 'Similiar videos'
+            : `Similiar videos (${filteredData.length > 0 ? filteredData.length : 0})`
           }
         </h2>
         {filteredData.length > 0 && filteredData.map((item) =>
