@@ -62,8 +62,8 @@ function App () {
                   src={`https://www.youtube.com/embed/${currentVideo.video_id}?autoplay=1`}
                   title="YouTube video player"
                   frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen/>
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen;"
+          />
           {playlist && Object.values(playlist).map((item) =>
             <li class="playlist__card" id={`playlist_id_${item.video_id}`}>
               <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
