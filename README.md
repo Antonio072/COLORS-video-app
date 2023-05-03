@@ -11,8 +11,8 @@ Este proyecto es una aplicación web desarrollada con Vite y React que te permit
 
 ## Capturas de pantalla
 
-![Captura de pantalla 1](screenshot1.png)
-![Captura de pantalla 2](screenshot2.png)
+![Captura de pantalla 1](docs/imgs/screenshoot_01.JPG)
+![Captura de pantalla 2](docs/imgs/screenshoot_02.JPG)
 
 ## Instalación
 
@@ -90,10 +90,12 @@ Este proyecto está bajo la Licencia [MIT](LICENSE). Siéntete libre de utilizar
 - [x] Títulos y duración de videos
 - [x] Cambio de contraste de texto según color de fondo
 - [ ] Cambiar el fondo por una animación de gradiente
-- [ ] Crear lista de reproducción personalizada
+- [x] Crear lista de reproducción personalizada
 - [x] Guardar filtros en cache
 - [ ] Usar API como backend
 - [ ] Mejorar diseño de la aplicación
+- [ ] Playlist aleatoria
+- [x] Sonner para los toast de acciones
 
 ### v2
 - [ ] Estado inicial para seleccionar color

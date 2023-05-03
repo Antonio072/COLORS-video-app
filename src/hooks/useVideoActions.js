@@ -1,4 +1,4 @@
-import { changeCurrentVideo, filterData } from '../store/slices/videoSlice'
+import { changeCurrentVideo, filterData, addVideoToPlaylist, deleteVideoFromPlaylist } from '../store/slices/videoSlice'
 import { useAppDispatch } from '../store/store'
 
 export const useVideoActions = () => {
@@ -12,5 +12,13 @@ export const useVideoActions = () => {
     dispatch(filterData({ hexValue, offset, originalVideos }))
   }
 
-  return { changeVideo, filterVideos }
+  const addToPlaylist = (video) => {
+    dispatch(addVideoToPlaylist(video))
+  }
+
+  const deleteFromPlaylist = (video) => {
+    dispatch(deleteVideoFromPlaylist(video))
+  }
+
+  return { changeVideo, filterVideos, addToPlaylist, deleteFromPlaylist }
 }

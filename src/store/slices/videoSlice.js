@@ -1,11 +1,14 @@
-import VIDEOS_INFO from '../../imagesInfo.json'
+import { enableMapSet } from 'immer'
 import { createSlice } from '@reduxjs/toolkit'
+
+import VIDEOS_INFO from '../../imagesInfo.json'
 import { filterDataFromHex } from '../../utils/functions'
 
 const DEFAULT_STATE = {
   currentVideo: VIDEOS_INFO[0],
   filteredData: VIDEOS_INFO,
-  originalVideos: VIDEOS_INFO
+  originalVideos: VIDEOS_INFO,
+  playlist: new Set()
 }
 
 const initialState = () => {
@@ -13,6 +16,7 @@ const initialState = () => {
   return persistedState ? JSON.parse(persistedState).videos : DEFAULT_STATE
 }
 
+enableMapSet()
 export const slice = createSlice({
   name: 'videos',
   initialState,
@@ -28,9 +32,17 @@ export const slice = createSlice({
 
       state.filteredData = filteredData
       state.originalVideos = originalVideos
+    },
+    addVideoToPlaylist: (state, action) => {
+      const { video } = action.payload
+      state.playlist[video.video_id] = video
+    },
+    deleteVideoFromPlaylist: (state, action) => {
+      const { video } = action.payload
+      delete state.playlist[video.video_id]
     }
   }
 })
 
 export default slice.reducer
-export const { changeCurrentVideo, filterData } = slice.actions
+export const { changeCurrentVideo, filterData, addVideoToPlaylist, deleteVideoFromPlaylist } = slice.actions

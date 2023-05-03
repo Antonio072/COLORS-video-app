@@ -11,7 +11,7 @@
   display: grid;  
   justify-content: center;
   grid-template-columns: 1fr;
-  padding: 0px 10px 10px 10px;
+  padding: 0px =10px;
 }
 
 .title {
@@ -29,6 +29,17 @@
 
 .color-slider {
   grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0px 10px;
+  text-align: center;
 }
 
 .main-video {
@@ -42,7 +53,7 @@
 }
 
 .container-items {
-  padding: 24px;
+  padding: 0px 24px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-auto-rows: minmax(fit-content, 150px);
@@ -92,18 +103,44 @@
   justify-content: space-between;
 }
 
-.card__pill{
-  height: 30px;
-  font-size: 0.8rem;
-  font-weight: 400;
-  border-radius: 5px;
-  padding: 0px 5px;
-  margin: 5px;
-  background: #2e2e2e;
-  color:white;
+.card__footer{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   bottom: 0;
   right: 0;
+}
+.card__pill{
+  height: 30px;
+  max-height: 35px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 1px 5px;
+  margin: 5px;
+  background: #2e2e2e;
+  color:white;
+}
+
+.card:hover footer .card__pill {
+  display: none;
+  animation: fadeOut 0.5s ease-in-out;
+}
+
+.card__add__to__playlist{
+  width: 35px;
+  max-height: 35px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  background: #2e2e2e;
+  color:white;
+}
+
+.card__add__to__playlist:hover{
+  background: #6b6b6b;
 }
 
 .card__duration{
@@ -117,4 +154,60 @@
   width: 100%;
   object-fit: contain;
   border-radius: 5px;
+}
+
+.gallery{
+  width: 100%;
+  display: flex;
+}
+
+.gallery li img {
+  width: 0px;
+  flex-grow: 1;
+  object-fit: cover;
+  opacity: 0.6;
+  filter: contrast(80%);
+  transition: all 0.5s ease;
+}
+
+.gallery li:hover img + .delete__icon{
+  display: block;
+}
+
+.gallery li:hover img,
+.gallery li img:hover{
+  cursor: pointer;
+  width: 300px;
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+.playlist__card{
+  height: 90%;
+  align-self: center;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.delete__icon{
+  height: 20px;
+  width: 20px;
+  padding: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #2e2e2e;
+  display: none;
+  border-radius: 5px;
+}
+
+.delete__icon:hover{
+  background: #6b6b6b;
+}
+
+.playlist__card.deleted {
+  transform: scale(0);
+  transition: all 0.3s ease;
 }
