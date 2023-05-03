@@ -29,16 +29,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v2.4.2
         with:
-          node-version: 18
-          cache: 'npm'
+          submodules: 'recursive'
+          ref: 'development' # Cambiar a la rama que quieres
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '14'
       - name: Install dependencies
-        run: npm install
-      - name: Build and deploy to GitHub Pages
-        uses: EdricChan03/action-build-deploy-ghpages@v3.1.0
-        with:
+        run: npm ci
+      - name: Build and deploy
+        run: |
+          npm run build
+          npm run deploy
+        env:
+          CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
