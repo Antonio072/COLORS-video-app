@@ -19,10 +19,9 @@ function App () {
     const contrastingColor = getContrastingColor(currentVideo.predominant_color)
     return contrastingColor
   })
-  const playListLength = Object.keys(playlist).length
-  const halfLength = Math.ceil(playListLength / 2)
-  const [firstHalf, setFirstHalf] = useState(Object.values(playlist).slice(0, halfLength))
-  const [secondHalf, setSecondHalf] = useState(Object.values(playlist).slice(halfLength), Object.keys(playlist).length)
+  const [firstHalf, setFirstHalf] = useState([])
+  const [secondHalf, setSecondHalf] = useState([])
+  const [currentPlaylistIndex, setCurrentPlaylistIndex] = useState(0)
 
   useEffect(() => {
     console.log(`El color seleccionado es: ${debounceBackgroundDecimal}`)

@@ -8,7 +8,7 @@ const DEFAULT_STATE = {
   currentVideo: VIDEOS_INFO[0],
   filteredData: VIDEOS_INFO,
   originalVideos: VIDEOS_INFO,
-  playlist: new Set()
+  playlist: {}
 }
 
 const initialState = () => {
