@@ -93,9 +93,13 @@ Este proyecto está bajo la Licencia [MIT](LICENSE). Siéntete libre de utilizar
 - [x] Crear lista de reproducción personalizada
 - [x] Guardar filtros en cache
 - [ ] Usar API como backend
-- [ ] Mejorar diseño de la aplicación
+- [x] Mejorar diseño de la aplicación
 - [ ] Playlist aleatoria
 - [x] Sonner para los toast de acciones
+- [ ] Reproducir videos en orden de la playlist
+- [ ] Buscar videos por nombre de artista/canción
+- [ ] Ordenar por vistas (Update de API)
+- [ ] Ordenar por fecha de publicación (Update de API)
 
 ### v2
 - [ ] Estado inicial para seleccionar color
