@@ -170,6 +170,26 @@ label {
   transition: all 0.5s ease;
 }
 
+/* Create an animation that starts at the centers and grow up */
+.gallery li img {
+  animation: zoom 0.5s;
+
+}
+
+/* The animation code */
+@keyframes zoom {
+  from {
+    opacity: 0.4;
+    filter: contrast(80%);
+    transform: scale(0.1);
+  }
+  to {
+    opacity: 1;
+    filter: contrast(120%);
+    transform: scale(1);
+  }
+}
+
 .gallery li:hover img + .delete__icon{
   display: block;
 }
@@ -180,6 +200,7 @@ label {
   width: 300px;
   opacity: 1;
   filter: contrast(120%);
+  transform: scale(1.1);
 }
 
 .playlist__card{
