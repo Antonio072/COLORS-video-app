@@ -19,6 +19,10 @@ function App () {
     const contrastingColor = getContrastingColor(currentVideo.predominant_color)
     return contrastingColor
   })
+  const playListLength = Object.keys(playlist).length
+  const halfLength = Math.ceil(playListLength / 2)
+  const [firstHalf, setFirstHalf] = useState(Object.values(playlist).slice(0, halfLength))
+  const [secondHalf, setSecondHalf] = useState(Object.values(playlist).slice(halfLength), Object.keys(playlist).length)
 
   useEffect(() => {
     console.log(`El color seleccionado es: ${debounceBackgroundDecimal}`)
@@ -53,19 +57,39 @@ function App () {
   // -> GOOD TO HAVE: Agregar Sonner para poner un toast
   // -> Boton para eliminar de la playlist
   // -> Acomodar el html para que el elemento actual sea el que siempre este en medio
+  useEffect(() => {
+    const playlistLength = Object.keys(playlist).length
+    if (playlistLength === 0) {
+      setFirstHalf([])
+      setSecondHalf([])
+    } else {
+      setFirstHalf(Object.values(playlist).slice(0, Math.ceil(playlistLength / 2)))
+      setSecondHalf(Object.values(playlist).slice(Math.ceil(playlistLength / 2), playlistLength))
+    }
+  }, [playlist])
   return (
     <div className="App" style={{ background: `linear-gradient(${currentVideo.predominant_color} 35%, white)` }}>
       <main className='main'>
         <h1 class="title" style={{ color: fontContrastColor }}>COLORS video player</h1>
         <section className="gallery">
+          {playlist && firstHalf.slice(0).reverse().map((item, index) => {
+            const invertedIndex = firstHalf.length - index
+            return <li style={{ height: `calc(90% - ${invertedIndex * 30}px)` }} className="playlist__card" id={`playlist_id_${item.video_id}`} >
+              <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
+              <div className="card__pill delete__icon" onClick={() => handleDeleteVideoFromPlaylist(item)}>
+                <DeleteFromQueue className='delete__icon' color={'#fff'} height={20} width={20} />
+              </div>
+            </li>
+          }
+          )}
           <iframe className="main-video"
                   src={`https://www.youtube.com/embed/${currentVideo.video_id}?autoplay=1`}
                   title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen;"
           />
-          {playlist && Object.values(playlist).map((item) =>
-            <li class="playlist__card" id={`playlist_id_${item.video_id}`}>
+          {playlist && secondHalf.map((item, index) =>
+            <li style={{ height: `calc(90% - ${index * 30}px)` }} className="playlist__card" id={`playlist_id_${item.video_id}`} >
               <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
               <div className="card__pill delete__icon" onClick={() => handleDeleteVideoFromPlaylist(item)}>
                 <DeleteFromQueue className='delete__icon' color={'#fff'} height={20} width={20} />
