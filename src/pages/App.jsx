@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDebounce } from '../hooks/useDebounce'
 import { Toaster } from 'sonner'
 
@@ -66,6 +66,46 @@ function App () {
       setSecondHalf(Object.values(playlist).slice(Math.ceil(playlistLength / 2), playlistLength))
     }
   }, [playlist])
+
+  const onMessageReceived = (event) => {
+    const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data
+    if (event.origin === 'https://www.youtube.com') {
+      if ((data.event === 'onStateChange' && data.info === 0) ||
+        (data.event === 'infoDelivery' && data.info.playerState === 0)) {
+        if (Object.keys(playlist).length === 0) {
+          return
+        }
+
+        const nextVideo = Object.values(playlist)[currentPlaylistIndex + 1]
+        if (nextVideo != null) {
+          handleChangeCurrentVideo(nextVideo)
+          setCurrentPlaylistIndex(currentPlaylistIndex + 1)
+        } else {
+          setCurrentPlaylistIndex(0)
+          handleChangeCurrentVideo(Object.values(playlist)[0])
+        }
+      }
+    }
+  }
+
+  const createListenerForYTIframe = () => {
+    const iframe = document.getElementById('youtube-player')
+    const player = iframe.contentWindow
+    player.postMessage(JSON.stringify({
+      event: 'listening',
+      id: currentVideo.video_id
+    }), '*')
+    window.removeEventListener('message', onMessageReceived)
+    window.addEventListener('message', onMessageReceived)
+  }
+
+  useEffect(() => {
+    createListenerForYTIframe()
+  }, [])
+  useEffect(() => {
+    createListenerForYTIframe()
+  }, [currentVideo, playlist])
+
   return (
     <div className="App" style={{ background: `linear-gradient(${currentVideo.predominant_color} 35%, white)` }}>
       <main className='main'>
@@ -81,8 +121,9 @@ function App () {
             </li>
           }
           )}
-          <iframe className="main-video"
-                  src={`https://www.youtube.com/embed/${currentVideo.video_id}?autoplay=1`}
+          <iframe id="youtube-player"
+                  className="main-video"
+                  src={`https://www.youtube.com/embed/${currentVideo.video_id}?autoplay=1&enablejsapi=1`}
                   title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen;"
