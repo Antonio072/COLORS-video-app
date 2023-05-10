@@ -264,7 +264,7 @@ label {
     max-height: 255px;
   }
   .playlist__card{
-    width: 100px;
+    width: 150px;
     height: 10vh;
   }
   .subtitle{
@@ -280,5 +280,14 @@ label {
     width: 100%;
     margin-top: 10px;
     flex-direction: column;
+  }
+  .delete__icon{
+    width: 15px;
+    height: 15px;
+    display: block;
+  }
+  svg {
+    width: 15px;
+    height: 15px;
   }
 }
