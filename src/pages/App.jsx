@@ -3,12 +3,14 @@ import { useDebounce } from '../hooks/useDebounce'
 import { Toaster } from 'sonner'
 
 import { useVideoActions } from '../hooks/useVideoActions'
+import useWindowSize from '../hooks/useWindowSize'
 import { useAppSelector } from '../store/store'
 
 import { getContrastingColor } from '../utils/functions'
 import '../styles/App.css'
 import AddToQueue from '../svgs/AddToQueue'
 import DeleteFromQueue from '../svgs/DeleteFromQueue'
+import { WINDOW_SIZES } from '../utils/constants'
 
 function App () {
   const { changeVideo, filterVideos, addToPlaylist, deleteFromPlaylist } = useVideoActions()
@@ -22,6 +24,7 @@ function App () {
   const [firstHalf, setFirstHalf] = useState([])
   const [secondHalf, setSecondHalf] = useState([])
   const [currentPlaylistIndex, setCurrentPlaylistIndex] = useState(0)
+  const WINDOW_SIZE = useWindowSize()
 
   useEffect(() => {
     console.log(`El color seleccionado es: ${debounceBackgroundDecimal}`)
@@ -106,14 +109,32 @@ function App () {
     createListenerForYTIframe()
   }, [currentVideo, playlist])
 
+  const calcPlaylistHeight = (index, side) => {
+    /* It detects if the window size is mobile or desktop
+    If it's mobile, it returns an empty object so the height is not calculated thus
+    the style is not overriden and the height is set according to the css media query
+    */
+
+    const IS_MOBILE = window.width <= 768 ? WINDOW_SIZES.mobile : WINDOW_SIZES.desktop
+    if (IS_MOBILE) {
+      return {}
+    } else {
+      if (side === 'left') {
+        const invertedIndex = firstHalf.length - index
+        return { height: `calc(90% - ${invertedIndex * 30}px)` }
+      } else if (side === 'right') {
+        return { height: `calc(90% - ${index * 30}px)` }
+      }
+    }
+  }
+
   return (
     <div className="App" style={{ background: `linear-gradient(${currentVideo.predominant_color} 35%, white)` }}>
       <main className='main'>
         <h1 class="title" style={{ color: fontContrastColor }}>COLORS video player</h1>
         <section className="gallery">
           {playlist && firstHalf.slice(0).reverse().map((item, index) => {
-            const invertedIndex = firstHalf.length - index
-            return <li style={{ height: `calc(90% - ${invertedIndex * 30}px)` }} className="playlist__card" id={`playlist_id_${item.video_id}`} >
+            return <li style={calcPlaylistHeight(index, 'left')} className="playlist__card" id={`playlist_id_${item.video_id}`} >
               <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
               <div className="card__pill delete__icon" onClick={() => handleDeleteVideoFromPlaylist(item)}>
                 <DeleteFromQueue className='delete__icon' color={'#fff'} height={20} width={20} />
@@ -127,9 +148,9 @@ function App () {
                   title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen;"
-          />
+                  />
           {playlist && secondHalf.map((item, index) =>
-            <li style={{ height: `calc(90% - ${index * 30}px)` }} className="playlist__card" id={`playlist_id_${item.video_id}`} >
+            <li style={calcPlaylistHeight(index, 'right')} className="playlist__card" id={`playlist_id_${item.video_id}`} >
               <img src={item.thumbnail_url} alt="gallery" onClick={() => handleChangeCurrentVideo(item)} className="gallery__img" />
               <div className="card__pill delete__icon" onClick={() => handleDeleteVideoFromPlaylist(item)}>
                 <DeleteFromQueue className='delete__icon' color={'#fff'} height={20} width={20} />

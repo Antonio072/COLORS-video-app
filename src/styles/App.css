@@ -11,7 +11,7 @@
   display: grid;  
   justify-content: center;
   grid-template-columns: 1fr;
-  padding: 0px =10px;
+  padding: 0px 0px;
 }
 
 .title {
@@ -22,7 +22,6 @@
 }
 .subtitle {
   font-size: 1.5rem;
-  font-weight: 400;
   color: #fff;
   grid-column: 1 / -1;
 }
@@ -231,4 +230,55 @@ label {
 .playlist__card.deleted {
   transform: scale(0);
   transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 936px) {
+  .main-video{
+    min-height: 300px;
+    max-height: 400px;
+  }
+}
+/* Creates responsive */
+@media screen and (max-width: 767px) {
+  .App {
+    padding: 0px 0px;
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  .title{
+    font-size: 1.5rem;
+  }
+  .gallery{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .main-video {
+    flex-basis: 100%;
+    order: -1;
+    border-radius: 0px;
+    min-height: 81px;
+    max-height: 255px;
+  }
+  .playlist__card{
+    width: 100px;
+    height: 10vh;
+  }
+  .subtitle{
+    font-size: 1.2rem;
+    word-wrap: break-word; /* Para dividir palabras largas en varias líneas */
+    word-break: break-word; /* Para dividir palabras largas en varias líneas */
+    padding: 0px 1rem;
+  }
+  .container-items{
+    padding: 0px 10px;
+  }
+  .color-slider{
+    width: 100%;
+    margin-top: 10px;
+    flex-direction: column;
+  }
 }
