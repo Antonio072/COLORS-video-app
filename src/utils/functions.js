@@ -13,7 +13,7 @@ export function getContrastingColor (hex) {
   const g = parseInt(hex.slice(2, 4), 16)
   const b = parseInt(hex.slice(4, 6), 16)
   // https://stackoverflow.com/a/3943023/112731
-  return (r * 0.299 + g * 0.587 + b * 0.114) > 150
+  return (r * 0.299 + g * 0.587 + b * 0.114) > 116
     ? CONTRAST_COLORS.white
     : CONTRAST_COLORS.black
 }
